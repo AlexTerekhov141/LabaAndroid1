@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LabaAnroid1</string>
+    <string name="buttonOk">Enter the name</string>
+    <string name="SubmitB">Submit</string>
+    <string name="NameHint">Enter your name</string>
+    <string name="Greeting">Hello</string>
+</resources>
