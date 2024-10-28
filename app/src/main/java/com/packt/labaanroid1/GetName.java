@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -24,6 +25,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class GetName extends AppCompatActivity {
     private EditText nameEditText;// Поле для ввода имени пользователя
     private Button submitButton;//кнопка для подтверждения
+    private TextView messageTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,52 +34,29 @@ public class GetName extends AppCompatActivity {
 
         nameEditText = findViewById(R.id.nameEditText);
         submitButton = findViewById(R.id.submitButton);
+        messageTextView = findViewById(R.id.messageTextView);
         // Получаем Intent
         Intent intent = getIntent();
         String message = intent.getStringExtra("message");
 
-
+        if (message != null) {
+            messageTextView.setText(message);
+        }
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = nameEditText.getText().toString();// Получаем введенное имя пользователя
-                Intent resultIntent = new Intent();//создаем Intent
-                resultIntent.putExtra("name", name);
-                setResult(RESULT_OK, resultIntent);
-                finish();// Закрываем и возвращаемся
+                String name = nameEditText.getText().toString().trim(); // Получаем введенное имя пользователя
+
+                // Проверяем, ввел ли пользователь имя
+                if (name.isEmpty()) {
+                    Toast.makeText(GetName.this, "Введите имя", Toast.LENGTH_SHORT).show(); // Подсказка
+                } else {
+                    Intent resultIntent = new Intent(); // создаем Intent
+                    resultIntent.putExtra("name", name);
+                    setResult(RESULT_OK, resultIntent);
+                    finish(); // Закрываем и возвращаемся
+                }
             }
         });
-    }
-    //Для самопроверки
-    protected void onStart(){
-        Toast.makeText(this, "onStart called!", Toast.LENGTH_LONG).show();
-        super.onStart();
-        //Toast.makeText(this, "onStart called!", Toast.LENGTH_LONG).show();
-    }
-    protected void onRestart(){
-        Toast.makeText(this, "onRestart called!", Toast.LENGTH_LONG).show();
-        super.onRestart();
-        //Toast.makeText(this, "onRestart called!", Toast.LENGTH_LONG).show();
-    }
-    protected void onResume(){
-        Toast.makeText(this, "onResume called!", Toast.LENGTH_LONG).show();
-        super.onResume();
-        //Toast.makeText(this, "onResume called!", Toast.LENGTH_LONG).show();
-    }
-    protected void onPause(){
-        Toast.makeText(this, "onPause called!", Toast.LENGTH_LONG).show();
-        super.onPause();
-        //Toast.makeText(this, "onPause called!", Toast.LENGTH_LONG).show();
-    }
-
-    protected void onStop(){
-        Toast.makeText(this, "onStop called!", Toast.LENGTH_LONG).show();
-        super.onStop();
-        //Toast.makeText(this, "onStop called!", Toast.LENGTH_LONG).show();
-    }
-    protected void onDestroy(){
-        Toast.makeText(this, "onDestroy called!", Toast.LENGTH_LONG).show();
-        super.onDestroy();
-        //Toast.makeText(this, "onDestroy called!", Toast.LENGTH_LONG).show();
     }
 }

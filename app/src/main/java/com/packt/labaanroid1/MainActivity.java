@@ -41,19 +41,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Создание Intent для перехода на GetName
                 Intent i = new Intent(MainActivity.this, GetName.class);
-                i.putExtra("message", "hello");
+                i.putExtra("message", getString(R.string.Greeting));
                 startActivityForResult(i, REQUEST_CODE_GET_NAME);
             }
         });
         Toast.makeText(MainActivity.this, "onCreate called!", Toast.LENGTH_SHORT).show();
 
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
+        switch (requestCode) {
             case (REQUEST_CODE_GET_NAME):
-                if(resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
                     String name = data.getStringExtra("name");//Получаем имя
                     if (name != null) {
                         String greetingMessage = getString(R.string.Greeting) + ", " + name + "!";//Формируем сообщение
@@ -63,37 +64,4 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-    //Для самопроверки
-    protected void onStart(){
-        Toast.makeText(this, "onStart called!", Toast.LENGTH_LONG).show();
-        super.onStart();
-        //Toast.makeText(this, "onStart called!", Toast.LENGTH_LONG).show();
-    }
-    protected void onRestart(){
-        Toast.makeText(this, "onRestart called!", Toast.LENGTH_LONG).show();
-        super.onRestart();
-        //Toast.makeText(this, "onRestart called!", Toast.LENGTH_LONG).show();
-    }
-    protected void onResume(){
-        Toast.makeText(this, "onResume called!", Toast.LENGTH_LONG).show();
-        super.onResume();
-        //Toast.makeText(this, "onResume called!", Toast.LENGTH_LONG).show();
-    }
-    protected void onPause(){
-        Toast.makeText(this, "onPause called!", Toast.LENGTH_LONG).show();
-        super.onPause();
-        //Toast.makeText(this, "onPause called!", Toast.LENGTH_LONG).show();
-    }
-
-    protected void onStop(){
-        Toast.makeText(this, "onStop called!", Toast.LENGTH_LONG).show();
-        super.onStop();
-        //Toast.makeText(this, "onStop called!", Toast.LENGTH_LONG).show();
-    }
-    protected void onDestroy(){
-        Toast.makeText(this, "onDestroy called!", Toast.LENGTH_LONG).show();
-        super.onDestroy();
-        //Toast.makeText(this, "onDestroy called!", Toast.LENGTH_LONG).show();
-    }
-
 }
