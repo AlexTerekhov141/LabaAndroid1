@@ -5,4 +5,5 @@
         <string name="SubmitB">Подтвердить</string>
         <string name="NameHint">Введите имя</string>
         <string name="Greeting">Привет</string>
+        <string name="GreetingHint">Введите приветствие</string>
 </resources>

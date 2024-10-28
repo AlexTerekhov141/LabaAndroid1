@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,13 +36,17 @@ public class MainActivity extends AppCompatActivity {
 
         bOk = findViewById(R.id.bOk);
         greetingTextView = findViewById(R.id.greetingTextView);
-
+        EditText greetingEditText = findViewById(R.id.greetingEditText);
         bOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String greetingMessage = greetingEditText.getText().toString();//Возможность самому вписать текст приветствия || если ничего то Hello или Привет
+                if (greetingMessage.isEmpty()) {
+                    greetingMessage = getString(R.string.Greeting);
+                }
                 // Создание Intent для перехода на GetName
                 Intent i = new Intent(MainActivity.this, GetName.class);
-                i.putExtra("message", getString(R.string.Greeting));
+                i.putExtra("message",greetingMessage);
                 startActivityForResult(i, REQUEST_CODE_GET_NAME);
             }
         });
@@ -56,8 +61,9 @@ public class MainActivity extends AppCompatActivity {
             case (REQUEST_CODE_GET_NAME):
                 if (resultCode == RESULT_OK) {
                     String name = data.getStringExtra("name");//Получаем имя
+                    String message = data.getStringExtra("message");//Получаем message
                     if (name != null) {
-                        String greetingMessage = getString(R.string.Greeting) + ", " + name + "!";//Формируем сообщение
+                        String greetingMessage = message + ", " + name + "!";//Формируем сообщение
                         greetingTextView.setText(greetingMessage);// Отображаем сообщение
                     }
                 }

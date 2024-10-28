@@ -46,13 +46,13 @@ public class GetName extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = nameEditText.getText().toString().trim(); // Получаем введенное имя пользователя
-
                 // Проверяем, ввел ли пользователь имя
                 if (name.isEmpty()) {
                     Toast.makeText(GetName.this, "Введите имя", Toast.LENGTH_SHORT).show(); // Подсказка
                 } else {
                     Intent resultIntent = new Intent(); // создаем Intent
                     resultIntent.putExtra("name", name);
+                    resultIntent.putExtra("message", message);
                     setResult(RESULT_OK, resultIntent);
                     finish(); // Закрываем и возвращаемся
                 }

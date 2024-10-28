@@ -4,4 +4,5 @@
     <string name="SubmitB">Submit</string>
     <string name="NameHint">Enter your name</string>
     <string name="Greeting">Hello</string>
+    <string name="GreetingHint">Enter greeting</string>
 </resources>
